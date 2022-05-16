@@ -1,2 +1,24 @@
-# my_recipe_app
-Recipe app that allows user to create, delete, and read recipes created by them or the community, allowing the users to decide whether they'd be public or not
+# README
+
+This README would normally document whatever steps are necessary to get the
+application up and running.
+
+Things you may want to cover:
+
+* Ruby version
+
+* System dependencies
+
+* Configuration
+
+* Database creation
+
+* Database initialization
+
+* How to run the test suite
+
+* Services (job queues, cache servers, search engines, etc.)
+
+* Deployment instructions
+
+* ...
