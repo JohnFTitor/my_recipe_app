@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/faker-ruby/faker.git
+  revision: 7fa13f2bb1d837b182ec33ef951a9e6b5258f3e7
+  branch: master
+  specs:
+    faker (2.21.0)
+      i18n (>= 1.8.11, < 2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -260,6 +268,7 @@ DEPENDENCIES
   debug
   devise (~> 4.8, >= 4.8.1)
   factory_bot_rails (~> 6.2)
+  faker!
   jbuilder
   jsbundling-rails
   pg (~> 1.1)
