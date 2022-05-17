@@ -1,0 +1,20 @@
+<table class="table table-dark table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Food</th>
+      <th scope="col">Measurement unit</th>
+      <th scope="col">Unit price</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @items.each do |item| %>
+      <tr>
+        <th scope="row"><%= item.name %></th>
+        <td><%= item.measurement_unit %></td>
+        <td><%= item.price %></td>
+        <td><%= button_to 'Delete', '/', class: 'btn btn-danger' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
