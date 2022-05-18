@@ -1,9 +1,6 @@
-<%= form_with(model: food, url: foods_url, scope: :foods ) do |f| %>
+<%= form_with(model: food, url: foods_url, scope: :foods, class: 'text-white' ) do |f| %>
   <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
+    <h5 class="modal-title" id="exampleModalLabel">Create food</h5>
   </div>
   <div class="modal-body">
     <% if food.errors.any? %>
@@ -33,15 +30,13 @@
       <%= f.text_field :price, autofocus: true, autocomplete: "price" %>
     </div>
   </div>
-  <div class="modal-footer">
+  <div class="modal-footer justify-content-start">
     <% if food.persisted? %>
       <div class="float-right">
         <%= link_to 'Destroy', food, method: :delete, class: 'text_danger', data: { confirm: 'Are you sure?' } %>
       </div>
     <% end %>
 
-    <%= f.submit class: 'btn btn-primary' %>
-
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <%= f.submit class: 'btn btn-primary float-left' %>
   </div>
 <% end %>
