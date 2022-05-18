@@ -13,6 +13,9 @@
   <body>
     <% if notice %> <p class="notice"><%= notice %></p> <% end %>
     <% if alert %><p class="alert"><%= alert %></p> <% end %>
+    <% if user_signed_in? %>
+      <%= button_to 'Log out' , destroy_user_session_path, method: :delete, class: "btn btn-default btn-sm" %>
+    <% end %>
     <%= yield %>
   </body>
 </html>
