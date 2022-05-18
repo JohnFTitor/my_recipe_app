@@ -1,29 +1,29 @@
-<div>
+<div class="container-fluid d-flex justify-content-center align-items-center p-5">
   <% if flash[:error] %>
     <span> <%= flash[:error] %> </span>
   <% end %>
-  <%= form_with model: recipe, method: :post do |f| %>
-    <div>
-      <%= f.label :name %>
-      <%= f.text_field :name %>
+  <%= form_with model: recipe, class: "mt-5 d-flex flex-column align-items-center container", method: :post do |f| %>
+    <div class="d-flex flex-column align-items-center mt-3 w-100">
+      <%= f.label :name, class: "text-primary fs-5" %>
+      <%= f.text_field :name, class: "w-75 border border-secondary p-2" %>
     </div>
-    <div>
-      <%= f.label :preparation_time %>
-      <%= f.number_field :preparation_time %>
+    <div class="d-flex flex-column align-items-center mt-3 w-100">
+      <%= f.label :preparation_time, class: "text-primary fs-5" %>
+      <%= f.number_field :preparation_time, class: "w-25 border border-secondary p-2" %>
     </div>
-    <div>
-      <%= f.label :cooking_time %>
-      <%= f.number_field :cooking_time %>
+    <div class="d-flex flex-column align-items-center mt-3 w-100">
+      <%= f.label :cooking_time, class: "text-primary fs-5" %>
+      <%= f.number_field :cooking_time, class: "w-25 border border-secondary p-2" %>
     </div>
-    <div>
-      <%= f.label :description %>
-      <%= f.text_area :description, rows: 14 %>
+    <div class="d-flex flex-column align-items-center mt-3 w-100">
+      <%= f.label :description, class: "text-primary fs-5" %>
+      <%= f.text_area :description, rows: 14, class: "w-75 border border-secondary p-2" %>
     </div>
-    <div>
-      <%= f.label :public %>
-      <%= f.check_box :public %>
+    <div class="form-check form-switch d-flex flex-column align-items-center mt-3 w-100">
+      <%= f.label :public, class: "text-primary fs-5" %>
+      <%= f.check_box :public, class: "form-check-input" %>
     </div>
-    <%= f.submit 'Create Recipe' %>
+    <%= f.submit 'Create Recipe', class: "mt-3 btn btn-primary w-75" %>
   <% end %>
 </div>
 

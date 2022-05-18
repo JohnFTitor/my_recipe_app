@@ -10,11 +10,11 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
-  <body>
-    <% if notice %> <p class="notice"><%= notice %></p> <% end %>
-    <% if alert %><p class="alert"><%= alert %></p> <% end %>
+  <body class="bg-dark">
+    <% if notice %> <p class="position-absolute top-0 start-0 alert alert-primary"><%= notice %></p> <% end %>
+    <% if alert %><p class="position-absolute top-0 start-0 alert alert-danger"><%= alert %></p> <% end %>
     <% if user_signed_in? %>
-      <%= button_to 'Log out' , destroy_user_session_path, method: :delete, class: "btn btn-default btn-sm" %>
+      <%= button_to 'Log out' , destroy_user_session_path, method: :delete, class: "btn btn-primary position-absolute top-0 end-0" %>
     <% end %>
     <%= yield %>
   </body>

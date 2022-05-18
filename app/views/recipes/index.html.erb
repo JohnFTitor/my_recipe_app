@@ -1,19 +1,19 @@
-<div class="container-md">
+<div class="container-fluid d-flex flex-column align-items-center pt-5">
   <% if flash[:destroyed] %>
-    <span><%= flash[:destroyed] %></span>
+    <span class="position-absolute top-0 start-0 alert alert-danger"><%= flash[:destroyed] %></span>
   <% end %>
   <% if flash[:success] %>
-    <span> <%= flash[:success] %> </span>
+    <span class="position-absolute top-0 start-0 alert alert-success"> <%= flash[:success] %> </span>
   <% end %>
-  <%= link_to 'Add Recipe', new_recipe_path %>
-  <ul>
+  <%= link_to 'Add Recipe', new_recipe_path, class: "btn btn-secondary btn-small" %>
+  <ul class="container">
     <% @recipes.each do |recipe| %>
-      <li id= "recipe-card: <%=recipe.id%>" >
-        <%= link_to recipe_path(id: recipe.id), id: "Recipe: #{recipe.id}", class: "recipe" do %>
-          <h2> <%= recipe.name %> </h2>
-          <p> <%= truncate(recipe.description, :length => 150) %> </p>
+      <li id= "recipe-card: <%=recipe.id%>" class="container-fluid border border-2 border-primary mb-4 mt-3 p-4 position-relative" >
+        <%= link_to recipe_path(id: recipe.id), id: "Recipe: #{recipe.id}", class: "recipe d-flex justify-content-between" do %>
+          <h2 class="fs-1 text-white fw-semibold"> <%= recipe.name %> </h2>
+          <p class="text-white fs-5 pt-2"> <%= truncate(recipe.description, :length => 300) %> </p>
         <% end %>
-        <%= button_to 'Remove', recipe_path(id: recipe.id), method: :delete %>
+        <%= button_to 'Remove', recipe_path(id: recipe.id), method: :delete, class: "btn btn-danger" %>
       <li>
     <% end %>
   </ul>
