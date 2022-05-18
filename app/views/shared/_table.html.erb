@@ -13,7 +13,7 @@
         <th scope="row"><%= item.name %></th>
         <td><%= item.measurement_unit %></td>
         <td><%= item.price %></td>
-        <td><%= button_to 'Delete', '/', class: 'btn btn-danger' %></td>
+        <td><%= button_to 'Delete', food_path(item.id), class: 'btn btn-danger', method: :delete %></td>
       </tr>
     <% end %>
   </tbody>
