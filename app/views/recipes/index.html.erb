@@ -1,0 +1,17 @@
+<div class="container-md">
+  <% if flash[:destroyed] %>
+    <span><%= flash[:destroyed] %></span>
+  <% end %>
+  <%= link_to new_recipe_path %>
+  <ul>
+    <% @recipes.each do |recipe| %>
+      <li id= "recipe-card: <%=recipe.id%>" >
+        <%= link_to recipe_path(id: recipe.id), id: "Recipe: #{recipe.id}", class: "recipe" do %>
+          <h2> <%= recipe.name %> </h2>
+          <p> <%= truncate(recipe.description, :length => 150) %> </p>
+        <% end %>
+        <%= button_to 'Remove', recipe_path(id: recipe.id), method: :delete %>
+      <li>
+    <% end %>
+  </ul>
+</div>
