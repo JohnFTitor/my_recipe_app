@@ -58,4 +58,50 @@ RSpec.describe 'Recipes Page', type: :feature do
       expect(page).to have_current_path(new_recipe_path)
     end
   end
+
+  describe 'Add Recipe' do 
+    before(:all) do
+      User.destroy_all
+      create :user, :name, :password, :confirmed_at, email: 'user@example.com'
+    end
+    
+    before :each do
+      visit new_user_session_path
+      fill_in('Email', with: 'user@example.com')
+      fill_in('Password', with: '123456')
+      click_button 'Log in'
+      visit new_recipe_path
+    end
+
+    it 'Should contain all the fields' do 
+      name = find_field('Name')
+      preparation_time = find_field('Preparation time')
+      cooking_time = find_field('Cooking time')
+      description = find_field('Description')
+      public_field = find_field('Public') 
+
+      expect(name).to_not be_nil
+      expect(preparation_time).to_not be_nil
+      expect(cooking_time).to_not be_nil
+      expect(description).to_not be_nil
+      expect(public_field).to_not be_nil
+    end
+
+    it 'Should display an error message if required fields are empty' do 
+      click_button 'Create Recipe'
+
+      expect(page).to have_content('Wrond Value. Please make sure you filled all inputs')
+    end
+
+    it 'Should create recipe if required fields are not empty' do 
+      fill_in('Name', with: 'Test')
+      fill_in('Preparation time', with: 60)
+      fill_in('Cooking time', with: 60)
+
+      click_button 'Create Recipe'
+
+      expect(page).to have_current_path(recipes_path)
+      expect(page).to have_content('Recipe was succesfully created')
+    end
+  end
 end
