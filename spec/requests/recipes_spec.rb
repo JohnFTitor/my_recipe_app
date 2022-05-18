@@ -1,8 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe "Recipes", type: :request do
-  
-  describe "GET /index" do
+RSpec.describe 'Recipes', type: :request do
+  describe 'GET /index' do
     it 'should redirect to login page if not authenticated' do
       get recipes_path
 
