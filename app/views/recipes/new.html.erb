@@ -1,0 +1,29 @@
+<div>
+  <% if flash[:error] %>
+    <span> <%= flash[:error] %> </span>
+  <% end %>
+  <%= form_with model: recipe, method: :post do |f| %>
+    <div>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+    <div>
+      <%= f.label :preparation_time %>
+      <%= f.number_field :preparation_time %>
+    </div>
+    <div>
+      <%= f.label :cooking_time %>
+      <%= f.number_field :cooking_time %>
+    </div>
+    <div>
+      <%= f.label :description %>
+      <%= f.text_area :description, rows: 14 %>
+    </div>
+    <div>
+      <%= f.label :public %>
+      <%= f.check_box :public %>
+    </div>
+    <%= f.submit 'Create Recipe' %>
+  <% end %>
+</div>
+

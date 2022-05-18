@@ -2,7 +2,10 @@
   <% if flash[:destroyed] %>
     <span><%= flash[:destroyed] %></span>
   <% end %>
-  <%= link_to new_recipe_path %>
+  <% if flash[:success] %>
+    <span> <%= flash[:success] %> </span>
+  <% end %>
+  <%= link_to 'Add Recipe', new_recipe_path %>
   <ul>
     <% @recipes.each do |recipe| %>
       <li id= "recipe-card: <%=recipe.id%>" >
