@@ -40,6 +40,16 @@ class RecipesController < ApplicationController
 
   private
 
+  # Internal: Define strong parameters for recipe creation.
+  #
+  # Retrieves values from the form and converts string data type to integer for 
+  # preparation_time and cooking_time properties, since the database requires it for
+  # its instantiation.
+  #
+  # No examples
+  #
+  # Returns a hash of parameters
+
   def recipe_params
     response = params.require(:recipe).permit(:name, :preparation_time, :cooking_time, :description, :public)
     response[:preparation_time] = response[:preparation_time].to_i

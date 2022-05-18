@@ -9,6 +9,12 @@ class User < ApplicationRecord
 
   validates :name, presence: true
   
+  #Internal: Retrieves recipes entries for the user in descending order.
+  #
+  # No Parameters.
+  #
+  # Returns the array of recipes.
+
   def get_recipes
     recipes.order(created_at: :desc)
   end
