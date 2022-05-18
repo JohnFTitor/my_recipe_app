@@ -1,17 +1,24 @@
 class FoodsController < ApplicationController
-  before_action :set_foods
 
+  #/foods
   def index
-    @items = @foods
+    @items = most_recent_added
+  end
+
+  def create
+
+  end
+
+  # public: gets the most recent posts from the database
+  #
+  # returns an array of at most 15 posts
+  def most_recent_added
+    Food.order(id: :desc).limit(15)
   end
 
   private
 
-  def most_recent_added
-    Food.all.limit(15)
-  end
-
-  def set_foods
-    @foods = most_recent_added
+  def  foods_params
+    params[]
   end
 end

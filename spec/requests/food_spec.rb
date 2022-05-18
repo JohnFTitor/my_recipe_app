@@ -1,7 +1,18 @@
 require 'rails_helper'
+require 'capybara/rspec'
 
 RSpec.describe "Foods", type: :request do
   describe "GET /index" do
-    pending "add some examples (or delete) #{__FILE__}"
+    it 'should visit the home page' do
+      get '/'
+      expect(response).to render_template(:index)
+    end
+  end
+
+  describe "GET /destroy" do
+    it 'should visit the home page' do
+      get '/'
+      expect(response).to render_template(:index)
+    end
   end
 end
