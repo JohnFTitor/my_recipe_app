@@ -39,6 +39,9 @@ gem 'cancancan', '~> 3.3'
 # For creating fake random data
 gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
 
+# To Document Functions
+gem 'tomdoc', '~> 0.2.5'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
