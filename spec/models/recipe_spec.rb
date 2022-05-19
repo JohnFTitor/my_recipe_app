@@ -1,8 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Recipe, type: :model do
-  let(:user) { create :user, :name, :password, :confirmed_at, :email }
-  subject { create :recipe, :name, :preparation_time, :cooking_time, :public, user: }
+  before :all do
+    User.destroy_all
+    @user = FactoryBot.create :user
+  end
+
+  subject { create :recipe, :name, :preparation_time, :cooking_time, :public, user: @user }
 
   it 'should have a name attribute' do
     subject.name = nil

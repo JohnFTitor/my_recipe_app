@@ -4,7 +4,10 @@ RSpec.describe 'Recipes Page', type: :feature do
   describe 'Get Index' do
     before(:all) do
       User.destroy_all
-      @user = create :user, :name, :password, :confirmed_at, email: 'user@example.com'
+      @user = FactoryBot.build :user
+      @user.password = '123456'
+      @user.email = 'user@example.com'
+      @user.save
       create_list :recipe, 20, :name, :preparation_time, :cooking_time, :description, :public, user: @user
     end
 
@@ -61,7 +64,10 @@ RSpec.describe 'Recipes Page', type: :feature do
   describe 'Add Recipe' do
     before(:all) do
       User.destroy_all
-      create :user, :name, :password, :confirmed_at, email: 'user@example.com'
+      user = FactoryBot.build :user
+      user.password = '123456'
+      user.email = 'user@example.com'
+      user.save
     end
 
     before :each do
