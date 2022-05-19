@@ -8,7 +8,7 @@ RSpec.describe 'Recipes Page', type: :feature do
       @user.password = '123456'
       @user.email = 'user@example.com'
       @user.save
-      create_list :recipe, 20, :name, :preparation_time, :cooking_time, :description, :public, user: @user
+      create_list :recipe, 5, :name, :preparation_time, :cooking_time, :description, :public, user: @user
     end
 
     before :each do
@@ -26,7 +26,7 @@ RSpec.describe 'Recipes Page', type: :feature do
     it 'Should display user own recipes' do
       recipes = page.find_all('.recipe')
 
-      expect(recipes.length).to eq(20)
+      expect(recipes.length).to eq(5)
     end
 
     it 'Should lead to recipe details' do
@@ -119,9 +119,10 @@ RSpec.describe 'Recipes Page', type: :feature do
       @user.save
       @user2 = FactoryBot.create :user
       @user3 = FactoryBot.create :user
+      @user3.name = "Don't find me"
       create_list :recipe, 10, :name, :preparation_time, :cooking_time, :description, public: true, user: @user
       create_list :recipe, 7, :name, :preparation_time, :cooking_time, :description, public: true, user: @user2
-      create_list :recipe, 10, :name, :preparation_time, :cooking_time, :description, public: false, user: @user3
+      create_list :recipe, 3, :name, :preparation_time, :cooking_time, :description, public: false, user: @user3
     end
 
     before(:each) do
@@ -141,7 +142,7 @@ RSpec.describe 'Recipes Page', type: :feature do
     end
 
     it 'Should lead to recipe details' do
-      id = @user.public_recipes.first.id
+      id = Recipe.public_recipes.first.id
 
       recipe = page.find('a', id: "Recipe: #{id}")
 
@@ -151,7 +152,7 @@ RSpec.describe 'Recipes Page', type: :feature do
     end
 
     it 'should not be able to see remove button if not authenticated' do 
-      expect(page).to_not find_button('Remove')
+      expect(page).to_not have_content('Remove')
     end
 
     it 'should not be able to see remove button for other users' do
@@ -162,11 +163,10 @@ RSpec.describe 'Recipes Page', type: :feature do
       click_button 'Log in'
       visit public_recipes_path
 
-
-      recipe_record = @user2.public_recipes.first
+      recipe_record = Recipe.public_recipes.where(user_id: @user2.id).limit(1)[0]
       recipe = page.find('li', id: "recipe-card: #{recipe_record.id}")
 
-      expect(recipe).to_not find_button('Remove')
+      expect(recipe).to_not have_content('Remove')
     end
  
     it 'Should allow users to delete its own recipes' do
@@ -178,7 +178,7 @@ RSpec.describe 'Recipes Page', type: :feature do
       click_button 'Log in'
       visit public_recipes_path
 
-      recipe_record = @user.public_recipes.first
+      recipe_record = Recipe.public_recipes.where(user_id: @user.id).limit(1)[0]
       recipe = page.find('li', id: "recipe-card: #{recipe_record.id}")
       remove = recipe.find_button('Remove')
       remove.click
@@ -188,7 +188,7 @@ RSpec.describe 'Recipes Page', type: :feature do
     end
 
     it 'should have relevant info of its ingredients' do
-      recipe_record = @user1.public_recipes.first
+      recipe_record = Recipe.public_recipes.first
       recipe = page.find('li', id: "recipe-card: #{recipe_record.id}")
 
       price = recipe_record.total_cost

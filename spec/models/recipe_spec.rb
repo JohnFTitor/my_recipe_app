@@ -37,8 +37,9 @@ RSpec.describe Recipe, type: :model do
 
   context 'Methods' do 
     before :all do 
-      @recipe = create :recipe, :name, :preparation_time, :cooking_time, :public, user: @user
-
+      @recipe = create :recipe, :name, :preparation_time, :cooking_time, public: true, user: @user
+      create_list :recipe, 5, :name, :preparation_time, :cooking_time, :description, public: true, user: @user
+      create_list :recipe, 5, :name, :preparation_time, :cooking_time, :description, public: false, user: @user
       @total_price = 0
 
       (1..20).each do
@@ -60,6 +61,14 @@ RSpec.describe Recipe, type: :model do
 
       expect(total_ingredients).to eq(20)
     end
-  end
 
+    it 'should return all public recipes ordered by creation' do 
+      public_recipes = Recipe.public_recipes
+
+      public_recipes.each do |public_recipe| 
+        expect(public_recipe.public).to be true
+      end
+      expect(public_recipes.length).to eq(6)
+    end
+  end
 end
