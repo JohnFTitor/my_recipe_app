@@ -13,7 +13,9 @@ RSpec.describe User, type: :model do
   describe 'Methods' do
     before(:all) do
       User.destroy_all
-      @user = create :user, :name, :password, :confirmed_at, email: 'user@example.com'
+      @user = FactoryBot.build :user
+      @user.email = 'user@example.com'
+      @user.save
       create_list :recipe, 20, :name, :preparation_time, :cooking_time, :description, :public, user: @user
       create :recipe, :preparation_time, :cooking_time, :description, :public, user: @user, name: 'last_added'
     end
