@@ -13,11 +13,10 @@ RSpec.describe User, type: :model do
   describe 'Methods' do
     before(:all) do
       User.destroy_all
-      @user = FactoryBot.build :user
-      @user.email = 'user@example.com'
-      @user.save
-      create_list :recipe, 20, :name, :preparation_time, :cooking_time, :description, :public, user: @user
-      create :recipe, :preparation_time, :cooking_time, :description, :public, user: @user, name: 'last_added'
+      @user = FactoryBot.create :user
+      create_list :recipe, 20, :name, :preparation_time, :cooking_time, :description, public: true, user: @user
+      create_list :recipe, 10, :name, :preparation_time, :cooking_time, :description, public: false, user: @user
+      create :recipe, :preparation_time, :cooking_time, :description, public: false, user: @user, name: 'last_added'
     end
 
     it 'should return all recipes ordered by creation' do
@@ -25,8 +24,15 @@ RSpec.describe User, type: :model do
 
       last_added_name = recipes.first.name
 
-      expect(recipes.length).to eq(21)
+      expect(recipes.length).to eq(31)
       expect(last_added_name).to eq('last_added')
+    end
+
+    it 'should return all public recipes ordered by creation' do 
+      public_recipes = @user.public_recipes
+
+      
+      expect(public_recipes.length).to eq(20)
     end
   end
 end
