@@ -5,7 +5,7 @@
   <div class="modal-body">
     <% if food.errors.any? %>
       <div id="error_explanation">
-        <h2><%= pluralize(food.errors.count, 'error') %> prohibited this post from being saved:</h2>
+        <h2><%= pluralize(food.errors.count, 'error') %> prohibited this ingredients from being saved:</h2>
 
         <ul>
           <% food.erros.full_messages.each do |message| %>

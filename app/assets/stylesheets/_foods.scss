@@ -1,0 +1,12 @@
+.foods {
+  &-section {
+    min-height: 100vh;
+  }
+
+  &-table {
+    overflow: auto; 
+    height: 60vh;
+
+    thead th { position: sticky; top: 0; z-index: 1; } 
+  }
+}

@@ -3,18 +3,19 @@ class FoodsController < ApplicationController
 
   # /foods
   def index
-    @items = most_recent_added
+    @items = current_user.foods.order(created_at: :desc)
   end
 
   # /foods (post)
   def create
     food = Food.new(foods_params)
+    p food
     food.user = current_user
 
     if food.save
-      flash[:success] = 'Food has been created'
+      flash[:success] = 'Food item has been created'
     else
-      flash[:alert] = 'Error'
+      flash[:alert] = 'Food item could not be saved'
     end
     redirect_to foods_path
   end
@@ -22,9 +23,9 @@ class FoodsController < ApplicationController
   # /foods/:id (delete)
   def destroy
     if Food.find(params[:id]).destroy
-      flash[:success] = 'Food has been deleted'
+      flash[:success] = 'Food item has been deleted'
     else
-      flash[:alert] = 'Error'
+      flash[:alert] = 'Food item could not be deleted'
     end
     redirect_to foods_path
   end
@@ -39,6 +40,8 @@ class FoodsController < ApplicationController
   private
 
   def foods_params
-    params[:foods].permit(:name, :measurement_unit, :price)
+    par = params[:foods].permit(:name, :measurement_unit, :price)
+    par[:price] = par[:price].to_f
+    par
   end
 end

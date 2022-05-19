@@ -9,7 +9,7 @@ RSpec.describe 'Foods', type: :request do
     end
   end
 
-  describe 'GET /destroy' do
+  describe 'DELETE /destroy' do
     it 'should visit the home page' do
       delete food_path(1)
 
