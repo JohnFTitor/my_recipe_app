@@ -5,7 +5,7 @@ RSpec.describe 'Foods', type: :request do
   describe 'GET /index' do
     it 'should visit the home page' do
       get '/'
-      expect(response).to render_template(:index)
+      expect(response).to render_template(:show_public_recipes)
     end
   end
 

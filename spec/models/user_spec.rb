@@ -31,7 +31,9 @@ RSpec.describe User, type: :model do
     it 'should return all public recipes ordered by creation' do 
       public_recipes = @user.public_recipes
 
-      
+      public_recipes.each do |public_recipe| 
+        expect(public_recipe.public).to be true
+      end
       expect(public_recipes.length).to eq(20)
     end
   end

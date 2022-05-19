@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  before_action :authenticate_user!
+  skip_before_action :authenticate_user!, only: [:show, :show_public_recipes]
 
   def new
     recipe = Recipe.new
@@ -35,6 +35,10 @@ class RecipesController < ApplicationController
     Recipe.destroy(id)
     flash[:destroyed] = 'Recipe succesfully deleted'
     redirect_back(fallback_location: root_path)
+  end
+
+  def show_public_recipes
+
   end
 
   private
