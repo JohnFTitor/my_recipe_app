@@ -38,7 +38,7 @@ class RecipesController < ApplicationController
   end
 
   def show_public_recipes
-
+    @recipes = Recipe.public_recipes
   end
 
   private

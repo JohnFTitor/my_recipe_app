@@ -18,4 +18,8 @@ class User < ApplicationRecord
   def fetch_recipes
     recipes.order(created_at: :desc)
   end
+
+  def chef? 
+    role === 'chef'
+  end
 end
