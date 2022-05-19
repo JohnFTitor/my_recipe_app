@@ -19,6 +19,12 @@ class User < ApplicationRecord
     recipes.order(created_at: :desc)
   end
 
+  # Internal: Checks the value inside the role attribute.
+  #
+  # No parameters.
+  #
+  # Returns true if the user's role is chef.
+
   def chef?
     role == 'chef'
   end
