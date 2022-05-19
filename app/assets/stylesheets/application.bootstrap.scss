@@ -2,7 +2,6 @@
 
 $font-family-sans-serif:
   Poppins,
-
   Helvetica Neue #{"/* rtl:insert:Arabic */"},
   // Cross-platform generic font family (default user interface font)
   system-ui,
@@ -36,4 +35,18 @@ h4,
 h5,
 h6 {
   font-family: 'Lato', sans-serif;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.btn-small {
+  width: fit-content;
+  box-sizing: border-box;
+  padding: 10px 20px;
 }

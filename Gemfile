@@ -39,6 +39,8 @@ gem 'cancancan', '~> 3.3'
 # For creating fake random data
 gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
 
+# To add Jquery into JavaScript
+gem 'jquery-rails'
 # To Document Functions
 gem 'tomdoc', '~> 0.2.5'
 
