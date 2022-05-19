@@ -55,7 +55,7 @@ RSpec.describe Recipe, type: :model do
       expect(total_price).to eq(@total_price)
     end
 
-    it 'should return the quantity of igrendients it has' do 
+    it 'should return the quantity of ingredients it has' do 
       total_ingredients = @recipe.total_ingredients
 
       expect(total_ingredients).to eq(20)
