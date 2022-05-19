@@ -9,10 +9,18 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
-
   <body class="bg-dark">
-    <% if notice %> <p class="position-absolute top-0 start-0 alert alert-primary"><%= notice %></p> <% end %>
-    <% if alert %><p class="position-absolute top-0 start-0 alert alert-danger"><%= alert %></p> <% end %>
+    <% flash.each do |type, msg| %>
+      <% flash_class = '' %>
+      <% if type == 'success' %>
+        <% flash_class = 'success' %>
+      <% elsif type == 'alert' %>
+        <% flash_class = 'danger' %>
+      <% end %>
+      <div class="position-absolute top-0 start-0 alert alert-<%= flash_class %>">
+         <%= msg %>
+      </div>
+    <% end %>
     <% if user_signed_in? %>
       <%= button_to 'Log out' , destroy_user_session_path, method: :delete, class: "btn btn-primary position-absolute top-0 end-0" %>
     <% end %>
