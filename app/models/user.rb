@@ -8,4 +8,14 @@ class User < ApplicationRecord
   has_many :foods, dependent: :delete_all
 
   validates :name, presence: true
+
+  # Internal: Retrieves recipes entries for the user in descending order.
+  #
+  # No Parameters.
+  #
+  # Returns the array of recipes.
+
+  def fetch_recipes
+    recipes.order(created_at: :desc)
+  end
 end

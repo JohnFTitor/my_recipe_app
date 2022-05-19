@@ -1,26 +1,28 @@
 <h2>Log in</h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+<div class="container-fluid d-flex flex-column justify-content-center align-items-center p-5">
+  <%= form_for(resource, as: resource_name, html: { 'data-turbo': 'false' }, class: "mt-5 d-flex flex-column align-items-center container", url: session_path(resource_name)) do |f| %>
+    <div class="field d-flex flex-column align-items-center mt-3 w-100">
+      <%= f.label :email, class: "text-primary fs-5" %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "border border-secondary p-2" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+    <div class="field d-flex flex-column align-items-center mt-3 w-100">
+      <%= f.label :password, class: "text-primary fs-5" %><br />
+      <%= f.password_field :password, autocomplete: "current-password", class: "border border-secondary p-2" %>
+    </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+    <% if devise_mapping.rememberable? %>
+      <div class="field form-check d-flex flex-column align-items-center mt-3 w-100">
+        <%= f.check_box :remember_me, class: "form-check-input" %>
+        <%= f.label :remember_me, class: "text-primary fs-5 mt-3" %>
+      </div>
+    <% end %>
+
+    <div class="actions d-flex justify-content-center">
+      <%= f.submit "Log in", class: "mt-3 mb-3 btn btn-primary w-75" %>
     </div>
   <% end %>
+  <%= render "devise/shared/links" %>
+</div>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
