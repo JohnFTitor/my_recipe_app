@@ -10,20 +10,21 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
   <body class="bg-dark">
-    <% flash.each do |type, msg| %>
-      <% flash_class = '' %>
-      <% if type == 'success' %>
-        <% flash_class = 'success' %>
-      <% elsif type == 'alert' %>
-        <% flash_class = 'danger' %>
+    <%= render 'shared/navbar' %>
+    <div class="container-fluid position-relative">
+      <% flash.each do |type, msg| %>
+        <% flash_class = '' %>
+        <% if type == 'success' || type == 'notice' %>
+          <% flash_class = 'success' %>
+        <% elsif type == 'alert' %>
+          <% flash_class = 'danger' %>
+        <% end %>
+        <div class="position-absolute top-0 start-0 alert alert-<%= flash_class %> alert-dismissible">
+          <%= msg %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
       <% end %>
-      <div class="position-absolute top-0 start-0 alert alert-<%= flash_class %>">
-         <%= msg %>
-      </div>
-    <% end %>
-    <% if user_signed_in? %>
-      <%= button_to 'Log out' , destroy_user_session_path, method: :delete, class: "btn btn-primary position-absolute top-0 end-0" %>
-    <% end %>
-    <%= yield %>
+      <%= yield %>
+    </div>  
   </body>
 </html>
