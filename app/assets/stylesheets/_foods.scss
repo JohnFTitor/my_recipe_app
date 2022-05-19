@@ -4,9 +4,13 @@
   }
 
   &-table {
-    overflow: auto; 
+    overflow: auto;
     height: 60vh;
 
-    thead th { position: sticky; top: 0; z-index: 1; } 
+    thead th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
   }
 }
