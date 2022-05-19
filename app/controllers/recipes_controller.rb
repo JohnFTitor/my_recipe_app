@@ -21,7 +21,7 @@ class RecipesController < ApplicationController
           flash[:success] = 'Recipe was succesfully created'
           redirect_to action: :index
         else
-          flash.now[:error] = 'Wrond Value. Please make sure you filled all inputs'
+          flash.now[:alert] = 'Wrond Value. Please make sure you filled all inputs'
           render :new, status: 422, locals: { recipe: }
         end
       end
@@ -33,7 +33,7 @@ class RecipesController < ApplicationController
   def destroy
     id = params[:id]
     Recipe.destroy(id)
-    flash[:destroyed] = 'Recipe succesfully deleted'
+    flash[:alert] = 'Recipe succesfully deleted'
     redirect_back(fallback_location: root_path)
   end
 
