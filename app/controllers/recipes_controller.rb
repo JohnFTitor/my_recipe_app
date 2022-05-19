@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:show, :show_public_recipes]
+  skip_before_action :authenticate_user!, only: %i[show show_public_recipes]
 
   def new
     recipe = Recipe.new

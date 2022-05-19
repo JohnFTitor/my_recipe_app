@@ -10,8 +10,8 @@ RSpec.describe 'Recipes', type: :request do
     end
   end
 
-  describe 'GET /public_recipes' do 
-    it 'should render public recipes page' do 
+  describe 'GET /public_recipes' do
+    it 'should render public recipes page' do
       get public_recipes_path
 
       expect(response).to have_http_status(:ok)

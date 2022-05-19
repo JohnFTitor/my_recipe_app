@@ -7,7 +7,7 @@ class Recipe < ApplicationRecord
   validates :preparation_time, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
   validates :cooking_time, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
 
-  def total_cost 
+  def total_cost
     total_price = 0
     foods.each do |food|
       total_price += food.price

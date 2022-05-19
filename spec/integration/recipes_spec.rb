@@ -110,7 +110,7 @@ RSpec.describe 'Recipes Page', type: :feature do
     end
   end
 
-  describe 'See Public Recipes' do 
+  describe 'See Public Recipes' do
     before(:all) do
       User.destroy_all
       @user = FactoryBot.build :user
@@ -129,16 +129,16 @@ RSpec.describe 'Recipes Page', type: :feature do
       visit public_recipes_path
     end
 
-    it 'should display public recipes' do 
+    it 'should display public recipes' do
       recipes = page.find_all('.recipe')
 
       expect(recipes.length).to eq(17)
     end
 
-    it 'should contain user name in each recipe card' do 
-      expect(page).to have_content("By: #{@user.name}")      
-      expect(page).to have_content("By: #{@user2.name}")      
-      expect(page).to_not have_content("By: #{@user3.name}")      
+    it 'should contain user name in each recipe card' do
+      expect(page).to have_content("By: #{@user.name}")
+      expect(page).to have_content("By: #{@user2.name}")
+      expect(page).to_not have_content("By: #{@user3.name}")
     end
 
     it 'Should lead to recipe details' do
@@ -151,7 +151,7 @@ RSpec.describe 'Recipes Page', type: :feature do
       expect(page).to have_current_path(recipe_path(id:))
     end
 
-    it 'should not be able to see remove button if not authenticated' do 
+    it 'should not be able to see remove button if not authenticated' do
       expect(page).to_not have_content('Remove')
     end
 
@@ -168,9 +168,8 @@ RSpec.describe 'Recipes Page', type: :feature do
 
       expect(recipe).to_not have_content('Remove')
     end
- 
+
     it 'Should allow users to delete its own recipes' do
-      
       # Requires user to be logged in to see the remove button
       visit new_user_session_path
       fill_in('Email', with: 'user@example.com')

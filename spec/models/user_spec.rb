@@ -19,7 +19,7 @@ RSpec.describe User, type: :model do
       create :recipe, :preparation_time, :cooking_time, :description, public: false, user: @user, name: 'last_added'
     end
 
-    it 'should return true for default users' do 
+    it 'should return true for default users' do
       expect(@user.chef?).to be true
     end
 
