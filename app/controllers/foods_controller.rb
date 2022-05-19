@@ -1,12 +1,12 @@
 class FoodsController < ApplicationController
   before_action :authenticate_user!
 
-  #/foods
+  # /foods
   def index
     @items = most_recent_added
   end
 
-  #/foods (post)
+  # /foods (post)
   def create
     food = Food.new(foods_params)
     food.user = current_user
@@ -16,16 +16,17 @@ class FoodsController < ApplicationController
     else
       flash[:alert] = 'Error'
     end
-      redirect_to foods_path
+    redirect_to foods_path
   end
 
+  # /foods/:id (delete)
   def destroy
-    if Food.find(params[:id]).destroy 
+    if Food.find(params[:id]).destroy
       flash[:success] = 'Food has been deleted'
     else
       flash[:alert] = 'Error'
     end
-      redirect_to foods_path
+    redirect_to foods_path
   end
 
   # public: gets the most recent posts from the database
@@ -37,7 +38,7 @@ class FoodsController < ApplicationController
 
   private
 
-  def  foods_params
+  def foods_params
     params[:foods].permit(:name, :measurement_unit, :price)
   end
 end

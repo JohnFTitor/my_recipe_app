@@ -1,9 +1,7 @@
-
 require 'rails_helper'
 
-RSpec.describe "Foods", type: :feature do
-
-  describe "foods_path"
+RSpec.describe 'Foods', type: :feature do
+  describe 'foods_path'
 
   it 'should get redirected to log in' do
     visit foods_path
@@ -23,7 +21,7 @@ RSpec.describe "Foods", type: :feature do
       visit foods_path
     end
 
-    it 'should load foods_path' do 
+    it 'should load foods_path' do
       expect(page).to have_content 'Create food'
     end
   end
