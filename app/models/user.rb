@@ -20,12 +20,12 @@ class User < ApplicationRecord
   end
 
   def missing_food 
-    user_recipes = recipes.includes(:foods)
+    user_recipes = recipes.includes(:recipe_foods)
 
     missing_food = []
     
     user_recipes.each do |recipe|
-      missing_food.push(*recipe.foods.where.not(id: foods.ids))
+      missing_food.push(*recipe.recipe_foods.where.not(food_id: foods.ids))
     end
 
     price = calculate_missing_price(missing_food)
@@ -46,15 +46,9 @@ class User < ApplicationRecord
   private
   
   def calculate_missing_price(missing_food)
-    recipe_foods = []
-
-    missing_food.each do |missing_ingredient|
-      recipe_foods.push(RecipeFood.find_by(food_id: missing_ingredient.id))
-    end
-
     total_price = 0
 
-    recipe_foods.each do |recipe_food| 
+    missing_food.each do |recipe_food| 
       total_price += recipe_food.total_price
     end
 
