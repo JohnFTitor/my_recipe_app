@@ -18,8 +18,9 @@ class Recipe < ApplicationRecord
 
   def total_cost
     total_price = 0
-    foods.each do |food|
-      total_price += food.price
+    ingredients = recipe_foods.includes(:food)
+    ingredients.each do |ingredient|
+      total_price += ingredient.total_price
     end
     total_price
   end

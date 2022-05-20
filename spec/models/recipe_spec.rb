@@ -44,8 +44,8 @@ RSpec.describe Recipe, type: :model do
 
       (1..20).each do
         food = FactoryBot.create :food
-        RecipeFood.create(quantity: 1, recipe: @recipe, food:)
-        @total_price += food.price
+        RecipeFood.create(quantity: 3, recipe: @recipe, food:)
+        @total_price += food.price * 3
       end
     end
 
