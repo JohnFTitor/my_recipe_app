@@ -15,4 +15,24 @@ RSpec.describe RecipeFood, type: :model do
     total_price = @recipe_food.total_price
     expect(total_price).to eq(100)
   end
+
+  it 'should have a food' do
+    @recipe_food.food = nil
+    expect(@recipe_food).to_not be_valid
+  end
+
+  it 'should have a recipe' do
+    @recipe_food.recipe = nil
+    expect(@recipe_food).to_not be_valid
+  end
+
+  it 'should have a quantity' do
+    @recipe_food.quantity = nil
+    expect(@recipe_food).to_not be_valid
+  end
+
+  it 'quantity not should be a float' do
+    @recipe_food.quantity = 23.22
+    expect(@recipe_food).to_not be_valid
+  end
 end

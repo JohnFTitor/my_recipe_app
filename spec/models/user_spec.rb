@@ -14,9 +14,23 @@ RSpec.describe User, type: :model do
     before(:all) do
       User.destroy_all
       @user = FactoryBot.create :user
+      user2 = FactoryBot.create :user
       create_list :recipe, 5, :name, :preparation_time, :cooking_time, :description, :public, user: @user
       create_list :recipe, 5, :name, :preparation_time, :cooking_time, :description, :public, user: @user
-      create :recipe, :preparation_time, :cooking_time, :description, public: false, user: @user, name: 'last_added'
+      recipe = create :recipe, :preparation_time, :cooking_time, :description, public: false, user: @user,
+                                                                               name: 'last_added'
+      @total_price = 0
+
+      (1..10).each do |i|
+        food = FactoryBot.build :food
+        food.user = i <= 5 ? @user : user2
+        food.save
+        RecipeFood.create(quantity: 3, recipe:, food:)
+
+        next unless i > 5
+
+        @total_price += food.price * 3
+      end
     end
 
     it 'should return true for default users' do
@@ -30,6 +44,18 @@ RSpec.describe User, type: :model do
 
       expect(recipes.length).to eq(11)
       expect(last_added_name).to eq('last_added')
+    end
+
+    it 'should return all missing food for all recipes of the user' do
+      missing_food = @user.missing_food
+
+      expect(missing_food[:data].length).to eq(5)
+    end
+
+    it 'should return the total cost of the missing food' do
+      missing_food = @user.missing_food
+
+      expect(missing_food[:price]).to eq(@total_price)
     end
   end
 end

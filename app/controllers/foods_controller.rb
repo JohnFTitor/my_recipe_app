@@ -27,7 +27,7 @@ class FoodsController < ApplicationController
     else
       flash[:alert] = 'Food item could not be deleted'
     end
-    redirect_to foods_path
+    redirect_back fallback_location: '/'
   end
 
   # public: gets the most recent posts from the database
