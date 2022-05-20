@@ -8,7 +8,7 @@
         <h2><%= pluralize(food.errors.count, 'error') %> prohibited this ingredients from being saved:</h2>
 
         <ul>
-          <% food.erros.full_messages.each do |message| %>
+          <% food.errors.full_messages.each do |message| %>
             <li><%= message %></li>
           <% end %>
         </ul>
