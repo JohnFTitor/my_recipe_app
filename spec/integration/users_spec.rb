@@ -9,21 +9,18 @@ RSpec.describe 'Recipes Page', type: :feature do
       user.email = 'user@example.com'
       user.save
       user2 = FactoryBot.create :user
-      @recipe = create :recipe, :preparation_time, :cooking_time, :description, public: false, user: user, name: 'last_added'
+      @recipe = create :recipe, :preparation_time, :cooking_time, :description, public: false, user: user,
+                                                                                name: 'last_added'
       @total_price = 0
 
-      (1..5).each do
+      (1..10).each do |i|
         food = FactoryBot.build :food
-        food.user = user
+        food.user = i <= 5 ? user : user2
         food.save
         RecipeFood.create(quantity: 3, recipe: @recipe, food:)
-      end
 
-      (1..5).each do
-        food = FactoryBot.build :food
-        food.user = user2
-        food.save
-        RecipeFood.create(quantity: 3, recipe: @recipe, food:)
+        next unless i > 5
+
         @total_price += food.price * 3
       end
     end
@@ -40,39 +37,42 @@ RSpec.describe 'Recipes Page', type: :feature do
       expect(page).to have_content('Amount of food items to buy: 5')
     end
 
-    it 'should show the total cost of all the missing food' do 
+    it 'should show the total cost of all the missing food' do
       expect(page).to have_content("Total value of food needed: $#{@total_price}")
     end
 
-    it 'should have a table with all the missing food records' do 
+    it 'should have a table with all the missing food records' do
       missing_food = page.find_all('.ingredient')
 
       expect(missing_food.length).to eq(5)
     end
 
-    it 'should have the price for each of the missing food' do 
+    it 'should have the price for each of the missing food' do
       recipe_foods = @recipe.recipe_foods
 
       recipe_foods.each_with_index do |recipe_food, index|
         next if index < 5
+
         expect(page).to have_content(recipe_food.total_price)
       end
     end
 
-    it 'should have the quantity for each of the missing food' do 
+    it 'should have the quantity for each of the missing food' do
       recipe_foods = @recipe.recipe_foods
 
       recipe_foods.each_with_index do |recipe_food, index|
         next if index < 5
+
         expect(page).to have_content("#{recipe_food.quantity} #{recipe_food.food.measurement_unit}")
       end
     end
 
-    it 'should have the name for each of the missing food' do 
+    it 'should have the name for each of the missing food' do
       recipe_foods = @recipe.recipe_foods
 
       recipe_foods.each_with_index do |recipe_food, index|
         next if index < 5
+
         expect(page).to have_content(recipe_food.food.name)
       end
     end
