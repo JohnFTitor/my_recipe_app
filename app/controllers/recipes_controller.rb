@@ -28,7 +28,10 @@ class RecipesController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @recipe = Recipe.includes(:recipe_foods, :foods).find(params[:id])
+    @items = RecipeFood.includes(:recipe, :food).where(recipe_id: params[:id])
+  end
 
   def destroy
     id = params[:id]
@@ -39,6 +42,16 @@ class RecipesController < ApplicationController
 
   def show_public_recipes
     @recipes = Recipe.public_recipes
+  end
+
+  def update
+    id = params[:id]
+    respond_to do |format|
+      format.html do
+        public_val = !Recipe.find(id).public
+        redirect_back(fallback_location: '/') if Recipe.update(id, public: public_val)
+      end
+    end
   end
 
   private
