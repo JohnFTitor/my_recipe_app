@@ -25,7 +25,7 @@ class User < ApplicationRecord
     missing_food = []
     
     user_recipes.each do |recipe|
-      missing_food.push(*recipe.recipe_foods.where.not(food_id: foods.ids))
+      missing_food.push(*recipe.recipe_foods.where.not(food_id: foods.ids).includes(:food))
     end
 
     price = calculate_missing_price(missing_food)

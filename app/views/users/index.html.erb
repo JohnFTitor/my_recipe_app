@@ -1,1 +1,26 @@
-<h1> Welcome, User! </h1>
+<div>
+  <h1 class="text-white">General Shopping List</h1>
+  <div>
+    <p>Amount of food items to buy: <%= @recipe_foods.length %></p>
+    <p>Total value of food needed: $<%= @total_price %></p>
+  </div>
+  <table class="table shadow table-dark table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Food</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Price</th>
+    </tr>
+  </thead>
+  <tbody class="foods-table">
+    <% @recipe_foods.each do |recipe_food| %>
+      <tr class="ingredient">
+        <th scope="row"><%= recipe_food.food.name %></th>
+        <td><%= recipe_food.quantity %> <%= recipe_food.food.measurement_unit %></td>
+        <td><%= recipe_food.total_price %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+</div>
