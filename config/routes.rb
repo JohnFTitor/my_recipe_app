@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   resources :foods, only: %i[index create destroy]
   resources :recipes, only: %i[new create index show destroy]
   get 'public_recipes', to: 'recipes#show_public_recipes'
+  get 'general_shopping_list', to: 'users#index', as: 'shopping_list'
 end

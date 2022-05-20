@@ -19,13 +19,21 @@
         <% end %>
       </ul>
       <ul class="navbar-nav mb-2 mb-lg-0" >
-        <li>
-          <% if user_signed_in? %>
+        <% if user_signed_in? %>
+          <li>
+            <%= link_to shopping_list_path, class: 'btn btn-outline-secondary d-flex me-3' do %>
+              <i class="bi bi-cart text-white pe-2"></i>
+              Shopping List
+            <% end %>
+          </li>
+          <li>
             <%= button_to 'Log out', destroy_user_session_path, method: :delete, class: "btn btn-outline-primary" %>
-          <% else %>
+          </li>
+        <% else %>
+          <li>
             <%= link_to 'Log in', new_user_session_path, class: "btn btn-outline-primary" %>
-          <% end %>
-        </li>
+          </li>  
+        <% end %>
       </ul>
     </div>
   </div>
