@@ -5,7 +5,7 @@
 
   &-table {
     overflow: auto;
-    height: 60vh;
+    max-height: 60vh;
 
     thead th {
       position: sticky;
