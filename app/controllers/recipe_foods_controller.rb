@@ -17,7 +17,7 @@ class RecipeFoodsController < ApplicationController
       format.html do
         if RecipeFood.find(params[:id]).destroy
           flash[:success] = 'Recipe food has been deleted'
-        elsif
+        else
           flash[:alert] = 'Recipe food could not be deleted'
         end
         redirect_back fallback_location: '/'
