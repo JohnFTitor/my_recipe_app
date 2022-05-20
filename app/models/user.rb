@@ -4,8 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
 
-  has_many :recipes, dependent: :delete_all
-  has_many :foods, dependent: :delete_all
+  has_many :recipes, dependent: :destroy
+  has_many :foods, dependent: :destroy
 
   validates :name, presence: true
 
@@ -17,5 +17,15 @@ class User < ApplicationRecord
 
   def fetch_recipes
     recipes.order(created_at: :desc)
+  end
+
+  # Internal: Checks the value inside the role attribute.
+  #
+  # No parameters.
+  #
+  # Returns true if the user's role is chef.
+
+  def chef?
+    role == 'chef'
   end
 end

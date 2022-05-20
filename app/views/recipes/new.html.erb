@@ -1,7 +1,4 @@
 <div class="container-fluid d-flex justify-content-center align-items-center p-5">
-  <% if flash[:error] %>
-    <span> <%= flash[:error] %> </span>
-  <% end %>
   <%= form_with model: recipe, class: "mt-5 d-flex flex-column align-items-center container", method: :post do |f| %>
     <div class="d-flex flex-column align-items-center mt-3 w-100">
       <%= f.label :name, class: "text-primary fs-5" %>
