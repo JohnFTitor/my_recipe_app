@@ -1,0 +1,22 @@
+<div>
+  <h1> Public Recipes </h1>
+  <ul>
+    <% @recipes.each do |recipe| %>
+      <li id= "recipe-card: <%=recipe.id%>" class="container-fluid border border-2 border-primary mb-4 mt-3 p-4 position-relative" >
+        <%= link_to recipe_path(id: recipe.id), id: "Recipe: #{recipe.id}", class: "recipe d-flex justify-content-between px-5 flex-wrap" do %>
+          <div class="min-w-25">
+            <h2 class="fs-1 text-white fw-semibold"> <%= recipe.name %> </h2>
+            <p class="text-white fs-5 pt-2">By: <%= recipe.user.name %> </p>
+          </div>
+          <div class="min-w-25">
+            <p class="text-white fs-5 pt-2"> Total food items: <%= recipe.total_ingredients %> </p>
+            <p class="text-white fs-5 pt-2"> Total price: <%= recipe.total_cost %> </p>
+          </div>
+        <% end %>
+        <% if can? :destroy, recipe %>
+          <%= button_to 'Remove', recipe_path(id: recipe.id), method: :delete, class: "btn btn-danger ms-5" %>
+        <% end %>
+      </li>
+    <% end %> 
+  </ul>
+</div>

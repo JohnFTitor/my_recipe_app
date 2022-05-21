@@ -1,0 +1,23 @@
+<table class="table shadow table-dark table-striped">
+  <thead>
+    <tr>
+      <% columns.each do |column|%>
+        <th scope="col"><%= column %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody class="foods-table">
+    <% values.each do |item| %>
+      <tr>
+        <th scope="row"><%= item[0] %></th>
+        <td><%= item[1] %></td>
+        <td><%= item[2] %></td>
+        <td>
+          <% item[3].each do |button| %>
+            <%= button_to button[:label], button[:path], class: 'link-secondary transparent me-4', method: button[:method] %>
+          <% end %>        
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MyRecipeApp</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+  </head>
+  <body class="bg-dark">
+    <%= render 'shared/navbar' %>
+    <div class="container-fluid position-relative">
+      <% flash.each do |type, msg| %>
+        <% flash_class = '' %>
+        <% if type == 'success' || type == 'notice' %>
+          <% flash_class = 'success' %>
+        <% elsif type == 'alert' %>
+          <% flash_class = 'danger' %>
+        <% end %>
+        <div class="position-absolute top-0 start-0 alert alert-<%= flash_class %> alert-dismissible">
+          <%= msg %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% end %>
+      <%= yield %>
+    </div>  
+  </body>
+</html>

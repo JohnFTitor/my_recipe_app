@@ -1,0 +1,16 @@
+<section class="container-fluid d-flex flex-column p-5 gap-3 bg-dark foods-section">
+  <%= render partial: 'foods/form', locals: { food: Food.new } %>
+  <div class="foods-table">
+  <%= render partial: 'shared/table', locals: {
+    columns: ['Food', 'measurement unit', 'Value', 'Actions'],
+    values: @items.map {
+      |item| [
+        item.name,
+        item.measurement_unit,
+        item.price.to_s + '$',
+        [{label: 'Remove', path: food_path(item.id), method: :delete}]
+      ] 
+    } 
+  }%>
+  </div>
+</section>

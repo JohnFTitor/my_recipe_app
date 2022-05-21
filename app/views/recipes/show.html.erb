@@ -1,0 +1,50 @@
+<div class="recipe text-white p-5">
+  <h2 class="display-5 text-center"><%= @recipe.name %></h2>
+  <div class="d-flex justify-content-between">
+    <div>
+      <h3>Preparation time: <%= @recipe.preparation_time %></h3>
+      <h3>Cooking time: <%= @recipe.cooking_time %></h3>
+      <p><%= @recipe.description %></p>
+    </div>
+    <% if can? :manage, @recipe %>
+      <div>
+        <%= form_with(model: @recipe, url: recipe_path(@recipe.id), method: :put, class: 'form-check form-switch') do |f| %>
+          <%= f.label :public, class: "form-check-label" %>
+          <button type="submit" class="transparent">
+            <label class="switch align-middle">
+              <%= check_box_tag "public", :public, @recipe.public %>
+              <span class="slider round"></span>
+            </label>
+          </button>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <% if can? :manage, @recipe %>
+    <div class="d-flex justify-content-between">
+      <%= button_to 'Generate shopping list', '#', class: 'btn btn-secondary text-white' %>
+      <button type="button" class="btn btn-secondary text-white" data-bs-toggle="modal" data-bs-target="#newIngredientModal">
+        Add ingredient
+      </button>
+
+      <div class="modal fade" id="newIngredientModal" tabindex="-1" aria-labelledby="newIngredientModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <%= render partial: 'recipes/add_ingredient_form', locals: { food: RecipeFood.new, recipe_id: params[:id] }%>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <%= render partial: 'shared/table', locals: {
+    columns: ['Food', 'Quantity', 'Value', 'Actions'],
+    values: @items.map {
+      |item| [
+        item.food.name, "#{item.quantity} #{item.food.measurement_unit}",
+        item.food.price.to_s + '$',
+        [{label: 'Modify', path: '#'}, { label: 'Remove', path: recipe_food_path(item.id), method: :delete }]
+      ] 
+    } 
+  }%>
+</div>
