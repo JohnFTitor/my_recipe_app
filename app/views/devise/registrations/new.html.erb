@@ -1,34 +1,36 @@
-<h2>Sign up</h2>
+<h2 class="text-white text-center mt-5">Sign up</h2>
 
-<%= form_for(resource, as: resource_name, html: { 'data-turbo': 'false' }, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+<div class="container-fluid d-flex flex-column justify-content-center align-items-center p-5">
+  <%= form_for(resource, as: resource_name, html: { 'data-turbo': 'false', class: "d-flex flex-column align-items-center container gap-1 mb-2" },  url: registration_path(resource_name)) do |f| %>
+    <%# <%= render "devise/shared/error_messages", resource: resource %> 
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <div class="field d-flex flex-column align-items-center mt-1 w-100">
+      <%= f.label :email, class: "text-primary fs-5" %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
-  </div>
+    <div class="field d-flex flex-column align-items-center mt-1 w-100">
+      <%= f.label :name, class: "text-primary fs-5" %><br />
+      <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+    <div class="field d-flex flex-column align-items-center mt-1 w-100">
+      <%= f.label :password, class: "text-primary fs-5" %>
+      <% if @minimum_password_length %>
+      <em class="text-primary fs-6">(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "new-password" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+    <div class="field d-flex flex-column align-items-center mt-1 w-100">
+      <%= f.label :password_confirmation, class: "text-primary fs-5" %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+    <div class="actions d-flex justify-content-center mt-1">
+      <%= f.submit "Sign up", class: "btn btn-primary fw-bold" %>
+    </div>
+  <% end %>
 
-<%= render "devise/shared/links" %>
+  <%= render "devise/shared/links" %>
+</div>
